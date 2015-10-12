@@ -22,4 +22,5 @@ test:
 
 production:
   <<: *default
-  database: db/production.sqlite3
+  adpter: postgresql
+  database: blog_antonio_chavez_production
