@@ -1,4 +1,9 @@
 class PostsController < ApplicationController
+  rescue_from ActiveRecord::RecordNotFound do |e|
+    render text: "The page you're looking for doesn't exists",
+      status: 404
+  end
+
   def index
     @posts = Post.all
   end
@@ -27,7 +32,7 @@ class PostsController < ApplicationController
     if @post.update(post_params)
       redirect_to root_path
     else
-      render :edit
+      render :edit, status: :unprocessable_entity
     end
   end
 
